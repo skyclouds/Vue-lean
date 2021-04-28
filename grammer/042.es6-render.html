@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <script>
+        //箭头函数:也是一种定义函数的方式
+
+        //1.定义函数的方式:function
+        const aaa = function () {
+
+        }
+
+        //2.对象字面量中定义函数
+        const obj = {
+            aaa: function () {
+                setTimeout(function () {
+                    setTimeout(function () {
+                        console.log(this) //window
+                    })
+
+                    setTimeout(() => {
+                        console.log(this)//window
+                    })
+                })
+            },
+            bbb() {
+                setTimeout(() => {
+                    setTimeout(function () {
+                        console.log(this) //window
+                    })
+
+                    setTimeout(() => {
+                        console.log(this)//obj
+                    })
+                })
+            }
+        }
+
+        //箭头函数中的this是向外层作用域中一层层this,直到有this的定义
+        obj.aaa()
+        obj.bbb()
+
+        //3.ES6中的箭头函数
+        // const func=(参数列表)=>{
+
+        // }
+
+        //无参数
+        const ccc = () => {
+
+        }
+
+        //一个参数
+        const power = num => {
+            return num * num
+        }
+
+        // 两个参数
+        const sum = (num1, num2) => {
+            return num1 + num2
+        }
+
+        //函数中只有一行代码
+        const mul = (num1, num2) => num1 * num2
+        console.log(mul(20, 30))
+
+        const demo = () => console.log('Hello,Demo')
+        demo()
+
+        //函数中有多行代码
+        const test = () => {
+            console.log('Hello,Vue.js')
+        }
+
+
+
+    </script>
+</body>
+
+</html>
