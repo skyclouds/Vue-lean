@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{getFullName()}}</h2>
+        <h2>{{fullName}}</h2>
+        <h2>总价格:{{totalPrice}}</h2>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                firstName: 'kobe',
+                lastName: 'bryant',
+                books: [
+                    { id: 1, name: 'unix编程艺术', price: 119 },
+                    { id: 2, name: '代码大全', price: 105 },
+                    { id: 3, name: '深入理解计算机原理', price: 98 },
+                    { id: 4, name: '现代操作系统', price: 87 },
+                ]
+            },
+            computed: {//计算属性
+                fullName() {
+                    return this.firstName + ' ' + this.lastName
+                },
+                //filter/map/reduce
+                totalPrice() {
+                    let result = 0;
+                    // for(let i=0;i<this.books.length;i++){
+                    //     result+=this.books[i].price
+                    // }
+                    // for(let i in this.books){
+                    //     result+=this.books[i].price
+                    // }
+                    for (let book of this.books) {
+                        result += book.price
+                    }
+                    return result
+                }
+            },
+            methods: {
+                getFullName() {
+                    return this.firstName + ' ' + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

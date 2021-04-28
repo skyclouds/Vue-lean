@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn @btnclick="onBtnClick"></cpn>
+        <h2>当前记录:{{count}}</h2>
+        <counter :index="count" @add="onAdd" @sub="onSub"></counter>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <button v-for="item in categories" @click="btnClick(item)">{{item.name}}</button>
+        </div>
+    </template>
+
+    <template id="counter">
+        <div>
+            <button @click="add">+</button>
+            <button @click="sub" :disabled="index==0">-</button>
+        </div>
+    </template>
+
+    <script src="./js/vue.js"></script>
+    <script>
+
+        const cpn={
+            template:'#cpn',
+            data(){
+                return{
+                    categories:[
+                        {id:001,name:'热门推荐'},
+                        {id:002,name:'手机数码'},
+                        {id:003,name:'家用家电'},
+                        {id:004,name:'电脑办公'},
+                    ]
+                }
+            },
+            methods: {
+                btnClick(item){
+                    //发射事件(自定义事件,数据)
+                    //自定义事件名称尽量避免驼峰
+                    this.$emit('btnclick',item)
+                }
+            }
+        }
+
+        const counter={
+            template:'#counter',
+            props:['index'],
+            methods: {
+                add(){
+                    this.$emit('add')
+                },
+                sub(){
+                    this.$emit('sub')
+                }
+            }
+        }
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                count:0
+            },
+            components:{
+                cpn,
+                counter
+            },
+            methods: {
+                onBtnClick(item){
+                    console.log(item.name)
+                },
+                onAdd(counter){
+                    console.log('onAdd')
+                    this.count++;
+                },
+                onSub(){
+                    console.log('onSub')
+                    this.count--;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

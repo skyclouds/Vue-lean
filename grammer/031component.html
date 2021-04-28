@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <!-- script模版写法,注意type必须是text/x-template -->
+    <script type="text/x-template" id="cpn6">
+        <div>
+            <h2>我是标题6</h2>
+            <p>我是内容6</p>
+        </div>
+    </script>
+    <!-- template模版写法 -->
+    <template id="cpn7">
+        <div>
+            <h2>我是标题7</h2>
+            <p>我是内容7</p>
+        </div>
+    </template>
+
+    <div id="app">
+        <p>------------全局组件---------------</p>
+        <cpn1></cpn1>
+        <p>------------局部组件---------------</p>
+        <cpn2></cpn2>
+        <p>------------父子组件---------------</p>
+        <cpn3></cpn3>
+        <p>------------语法糖---------------</p>
+        <cpn4></cpn4>
+        <cpn5></cpn5>
+        <p>------------script模版写法---------------</p>
+        <cpn6></cpn6>
+        <p>------------template模版写法---------------</p>
+        <cpn7></cpn7>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //1、创建组建构造器对象
+        //Vue.extend:创建一个组件构造器
+        //传入template代表我们自定义的组件模版
+        //该模版就是在使用的地方要显示的HTML代码
+        //这周写法Vue.2x文档中已经看不到了,用语法糖代替
+        const cpnC1=Vue.extend({
+            template:`
+                <div>
+                    <h2>我是标题1</h2>
+                    <p>我是内容1</p>
+                </div>
+            `
+        })
+
+        const cpnC2=Vue.extend({
+            template:`
+                <div>
+                    <h2>我是标题2</h2>
+                    <p>我是内容2</p>
+                </div>
+            `
+        })
+
+        //父子组件
+        const cpnC3=Vue.extend({
+            template:`
+                <div>
+                    <h2>我是标题3</h2>
+                    <p>我是内容3</p>
+                    <cpn2></cpn2>
+                </div>
+            `,
+            components:{
+                cpn2:cpnC2
+            }
+        })
+
+        //2、注册组建
+        //Vue.component是将组建构造器注册为一个组件,并给组件一个标签名称
+        //所以需要传入两个参数1、注册组件的标签名称 2、组件构造器
+        //注册全局组件,意味着可以在多个Vue实例下使用
+        Vue.component('cpn1',cpnC1)
+        //注册全局组件语法糖
+        Vue.component('cpn4',{
+            template:`
+                <div>
+                    <h2>我是标题4</h2>
+                    <p>我是内容4</p>
+                </div>
+            `
+        })
+        //使用script模版写法
+        Vue.component('cpn6',{template:'#cpn6'})
+        //使用template模版写法
+        Vue.component('cpn7',{template:'#cpn7'})
+        //3、使用组件
+        //组件必须挂载在某个Vue实例下,否则不会生效
+
+        const app=new Vue({
+            el:'#app',  
+            components:{//注册局部组件,局部组件只能在指定的Vue实例下使用
+                //组件标签名称:组件构造器
+                cpn2:cpnC2,
+                cpn3:cpnC3,
+                //注册局部组件语法糖
+                cpn5:{
+                    template:`
+                        <div>
+                            <h2>我是标题5</h2>
+                            <p>我是内容5</p>
+                        </div>
+                    `
+                }
+            }        
+        })
+
+    </script>
+</body>
+
+</html>

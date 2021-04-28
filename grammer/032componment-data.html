@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <template id="counter">
+        <div>
+            <h2>{{title}}</h2>
+            <h2>当前计数:{{counter}}</h2>
+            <button @click="add">+</button>
+            <button @click="sub" :disabled="counter==0">-</button>
+        <div>
+    </template>
+
+    <div id="app">
+        <counter></counter>
+        <counter></counter>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        Vue.component('counter', {
+            template: '#counter',
+            //组件无法直接访问父组件或者Vue实例的data
+            //组件中的data必须是function
+            data() {
+                return {
+                    counter: 0
+                }
+            },
+            methods:{
+                add(){
+                    this.counter++;
+                },
+                sub(){
+                    this.counter--
+                }
+            }
+        })
+        const app = new Vue({
+            el: '#app',
+            data:{
+                title:'Hello,Vue.Js'
+            }
+        })
+    </script>
+</body>
+
+</html>

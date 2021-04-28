@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--1. .stop修饰符(event.stopPropagation)-->
+        <div @click="divOnClick">
+            Click
+            <button @click="btnOnClick">按钮1</button>
+            <button @click.stop="btnOnClick">按钮1</button>
+        </div>
+
+        <br>
+        <!--2. .prevent修饰符(event.preventDefault)-->
+        <form action="baidu">
+            <input type="submit" value="提交" @click.prevent="submitClick">
+        </form>
+
+        <br>
+        <!--3. .监听某个键盘按键-->
+        <input type="text" @keyup="keyUp">
+        <input type="text" @keyup.enter="keyUp">
+
+        <br>
+        <!--4. .once修饰符-->
+        <button @click.once="btn2OnClick">按钮2</button>
+
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',//用于挂载要管理的元素
+            data: {
+                message: 'Hello,Vue.js'
+            },
+            methods: {
+                divOnClick() {
+                    console.log('divOnClick')
+                },
+                btnOnClick() {
+                    console.log('btnOnClick')
+                },
+                submitClick() {
+                    console.log('submitClick')
+                },
+                keyUp(){
+                    console.log('keyUp')
+                },
+                btn2OnClick() {
+                    console.log('btn2OnClick')
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

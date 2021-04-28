@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <template id="cpn">
+        <div>
+            <h2>{{cpnmessage}}</h2>
+            <ul>
+                <li v-for="item in cpnmovie">{{item}}</li>
+            </ul>
+
+            <h2>{{cpninfo}}</h2>
+            <h2>{{playerMessageInfo}}</h2>
+        <div>
+    </template>
+
+    <div id="app">
+        <!-- 注意驼峰命名处理 -->
+        <cpn v-bind:cpnmovie="movies" :cpnmessage="message" :cpninfo="info" :player-message-info="info"></cpn>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+
+        const cpn = {
+            template: '#cpn',
+            // props写法1
+            // props:['cpnmovie','cpnmessage'],
+            // props写法2
+            props: {
+                //1.类型限制
+                // cpnmovie:Array,
+                // cpnmessage:String
+                //2.提供默认值以及必传值
+                //对象是数组或者对象时default必须是一个函数
+                cpnmovie: {
+                    type: Array,
+                    default(){
+                        return []
+                    }
+                },
+                cpnmessage: {
+                    //数据类型
+                    type: String,
+                    //默认值
+                    default: '',
+                    //必须传值,否则报错
+                    required: true
+                },
+                cpninfo:{
+                    type:Object,
+                    default(){
+                        return {}
+                    }
+                },
+                playerMessageInfo:{
+                    type: Object,
+                    default(){
+                        return {}
+                    }
+                }
+            }
+        }
+
+        //父组件通过props向子组件传递参数,Vue实例视为一个root组件
+        const app = new Vue({
+            el: '#app',
+            data: {
+                message: '今日电影',
+                movies: ['星际穿越', '大话西游', '少年派', '盗梦空间'],
+                info:{
+                    name:'kobe',
+                    age:18,
+                    height:1.98
+                }
+            },
+            components: {
+                cpn
+            }
+        })
+        //子组件通过事件向父组件发送消息
+
+    </script>
+</body>
+
+</html>

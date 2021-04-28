@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--单选框-->
+        <label for="agree">
+            <input type="checkbox" id="agree" v-model="isAgree" />同意
+        </label>
+        <h2>同意:{{isAgree}}</h2>
+        <!--多选框-->
+        <div v-show="isAgree">
+            <input type="checkbox" value="篮球" v-model="hobbies"/>篮球
+            <input type="checkbox" value="足球" v-model="hobbies"/>足球
+            <input type="checkbox" value="乒乓球" v-model="hobbies"/>乒乓球
+            <input type="checkbox" value="羽毛球" v-model="hobbies"/>羽毛球
+            <h2>爱好:{{hobbies}}</h2>
+        </div>
+
+        <label v-show="isAgree" v-for="item in orginHobbies">
+            <input type="checkbox" :value="item" :id="item" v-model="hobbies"/>{{item}}
+        </label>
+    </div>
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                isAgree: false,
+                hobbies:[],
+                orginHobbies:['篮球','足球','乒乓球']
+            }
+        })
+    </script>
+</body>
+
+</html>

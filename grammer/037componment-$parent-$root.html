@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <h2>我是子组件</h2>
+            <button @click="btnClick">子按钮</button>
+            <ccpn></ccpn>
+        </div>
+    </template>
+
+    <template id="ccpn">
+        <div>
+            <h2>我是孙子组件</h2>
+            <button @click="btnClick">孙子按钮</button>
+        </div>
+    </template>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                message: 'Hello,Vue.js'
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data(){
+                        return{
+                            name:'我是子组件的名字'
+                        }
+                    },
+                    methods: {
+                        btnClick() {
+                            //1.访问父组件$parent,不建议使用
+                            console.log(this.$parent)
+                        }
+                    },
+                    components: {
+                        ccpn: {
+                            template: '#ccpn',
+                            methods: {
+                                btnClick() {
+                                    //1.访问父组件$parent,基本不用(组件耦合度太高)
+                                    // console.log(this.$parent)
+                                    // console.log(this.$parent.name)
+
+                                    //2.访问根组件$root,基本也不用
+                                    console.log(this.$root)
+                                    console.log(this.$root.message)
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

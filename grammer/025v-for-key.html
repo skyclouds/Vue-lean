@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul> 
+            <li v-for="item in names" :key="item">{{item}}</li>    
+        </ul>
+
+        <ul> 
+            <li v-for="item in letters" :key="item">{{item}}</li>    
+        </ul>
+        <button @click="btnClick">按钮</button>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                names:['James','Kobe','Curry'],
+                letters:['A','C','B','E','D']
+            },
+            methods:{
+                btnClick(){
+
+                    //通过索引值修改数组中到元素不是响应式
+                    //this.letters[0]='bbb'
+
+
+                    //以下数组操作能响应式
+                    Vue.set(this.letters,0,'bbb')
+                    
+                    //删除数组中最后一个元素
+                    //this.letters.pop();
+                    
+                    //删除数组中第一个元素
+                    //this.letters.shift();
+
+                    //在数组最前面添加元素
+                    //this.letters.unshift('aaa');
+                    //this.letters.unshift('aaa','bbb','ccc');
+
+                    //在数组最后添加元素
+                    //this.letters.push('aaa');
+                    //this.letters.push('aaa','bbb','ccc');
+
+                    //在指定位置插入元素或者删除元素或者替换元素
+                    //splice(start,deleteCount,...items)
+                    // this.letters.splice(2);
+                    // this.letters.splice(2,2);
+                    // this.letters.splice(2,2,'aaa','bbb','ccc');
+                    // this.letters.splice(2,0,'aaa','bbb','ccc');
+                    //排序数组
+                    //this.letters.sort();
+                    //反转数组
+                    //this.letters.reverse();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

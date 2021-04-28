@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 1.在遍历过程中没有使用索引值(下标值) -->
+        <ul> 
+            <li v-for="item in names">{{item}}</li>    
+        </ul>
+        <!-- 2.在遍历过程中获取索引值-->
+        <ul> 
+            <li v-for="(item,index) in names">{{index+1}}.{{item}}</li>    
+        </ul>
+        <!-- 3.遍历对象过程中,只是获取一个值,那么获取到到是value-->
+        <ul> 
+            <li v-for="item in info">{{item}}</li>    
+        </ul>
+        <!-- 3.遍历对象过程中,获取key跟value-->
+        <ul> 
+            <li v-for="(value,key) in info">{{key}}:{{value}}</li>    
+        </ul>
+        <!-- 3.遍历对象过程中,获取key、value、index-->
+        <ul> 
+            <li v-for="(value,key,index) in info">{{index+1}}.{{key}}:{{value}}</li>    
+        </ul>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                names:['James','Kobe','Curry'],
+                info:{
+                    name:'Kobe',
+                    age:18,
+                    height:1.98
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

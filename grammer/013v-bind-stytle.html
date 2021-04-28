@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <h2 :style="{key(属性名):value(属性值)}">{{message}}</h2> -->
+        <!-- 50px必须加上单引号,否则适当做一个变量去解析 -->
+        <!-- <h2 :style="{fontSize:'50px'}">{{message}}</h2> -->
+        <!-- finalSize当成一个变量使用 -->
+        <h2 :style="{fontSize:finalSize,color:finalColor}">{{message}}</h2>
+        <h2 :style="getStyles()">{{message}}</h2>
+        <h2 :style="[baseStyle,fontStyle]">{{message}}</h2>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                message: 'Hello,Vue.js',
+                finalSize:'100px',
+                finalColor:'red',
+                baseStyle:{color:'red'},
+                fontStyle:{fontSize:'50px'}
+            },
+            methods: {
+                getStyles(){
+                    return {fontSize:this.finalSize,color:this.finalColor}
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

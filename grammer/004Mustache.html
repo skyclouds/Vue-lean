@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{message}}</h2>
+        <h2>{{message}},Vue</h2>
+        <!--Mustache语法中不仅可以直接谢变量,也可以写简单的表达式-->
+        <h2>{{firstName+lastName}}</h2>
+        <h2>{{firstName+' '+lastName}}</h2>
+        <h2>{{firstName}} {{lastName}}</h2>
+        <h2>{{counter*2}}</h2>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: '#app',//用于挂载要管理的元素
+            data: {//定义数据
+                message: 'Hello',
+                firstName: 'kobe',
+                lastName: 'bryant',
+                counter: 100
+            }
+        })
+    </script>
+</body>
+
+</html>

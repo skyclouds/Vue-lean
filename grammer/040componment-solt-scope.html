@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+
+<body>
+    <div id="app">
+        <cpn></cpn>
+        <cpn>
+            <!-- 目的是获取子组件中到languages -->
+            <!-- Vue2.5.x以下必须要用这个template模版 -->
+            <template slot-scope="aaa">
+                <h2 v-for="item in aaa.bbb">{{item}}</h2>
+            </template>
+        </cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <slot :bbb="languages">
+                <ul>
+                    <li v-for="item in languages">{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+    </template>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        //let(变量)/const(常量)
+        const app = new Vue({
+            el: "#app", //用于挂载要管理的元素
+            data: {//定义数据
+                message: 'Hello,Vue.js',
+            },
+            components: {
+                cpn: {
+                    template: '#cpn',
+                    data() {
+                        return {
+                            languages: ['C', 'C++', 'C#', 'Java', 'Python', 'Go', 'Swift']
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
