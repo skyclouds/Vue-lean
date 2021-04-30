@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import {INCREMENT} from "./mutations-types"
 export default {
     //定义方法,这里的state不需要this

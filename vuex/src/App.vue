@@ -14,7 +14,7 @@
     <button @click="addCount(5)">+5</button>
     <button @click="addCount(10)">+10</button>
     <button @click="addStu">Add</button>
-    <button @click="update">Apdate</button>
+    <button @click="update">Update</button>
     <button @click="asyncUpdate">AsyncUpdate</button>
     <button @click="updateName">UpdateName</button>
     <button @click="asyncUpdateName">AsyncUpdateName</button>
